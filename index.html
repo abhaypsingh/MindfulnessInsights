@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mindful Insights</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* GLOBAL RESET & BASE STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+      color: #fff;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Caveat', cursive;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* TITLE SECTION */
+    .title-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title-section h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .title-section p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* FLOATING SHAPES FOR FUN */
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatUp 10s infinite ease-in-out;
+    }
+    .shape-1 {
+      width: 120px;
+      height: 120px;
+      background: #fdc830;
+      left: 5%;
+      bottom: -20%;
+      animation-delay: 2s;
+    }
+    .shape-2 {
+      width: 80px;
+      height: 80px;
+      background: #ff5e62;
+      left: 30%;
+      bottom: -10%;
+      animation-delay: 4s;
+    }
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      background: #7ee8fa;
+      left: 70%;
+      bottom: -25%;
+      animation-delay: 1s;
+    }
+    .shape-4 {
+      width: 60px;
+      height: 60px;
+      background: #f093fb;
+      left: 50%;
+      bottom: -15%;
+      animation-delay: 3s;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-200px) scale(1.1);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* CATEGORIES WRAPPER */
+    .categories {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* CATEGORY ITEM */
+    .category {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+    .category:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .category h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ACCORDION CONTENT */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+    .accordion-content.open {
+      padding-top: 0.5rem;
+      opacity: 1;
+    }
+
+    .accordion-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    .accordion-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .accordion-list li::before {
+      content: "•";
+      color: #ffeaa7;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 600px) {
+      .title-section h1 {
+        font-size: 2.4rem;
+      }
+      .category h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING SHAPES FOR DECORATION -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <!-- TITLE SECTION -->
+  <div class="title-section">
+    <h1>Mindful Insights</h1>
+    <p>Open each category to reveal powerful mindfulness principles &amp; tips.  
+       Click again to hide.</p>
+  </div>
+
+  <!-- CATEGORIES WRAPPER -->
+  <div class="categories">
+    <!-- Category 1 -->
+    <div class="category">
+      <h2>1) Emotional Regulation & Stress Management</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Pause Before Reacting – Recognize the moment when emotion surges and choose a mindful response.</li>
+          <li>Stress Arises Internally – See stress not as the external trigger, but often as the body’s internal reaction.</li>
+          <li>Breath as Grounding – In moments of overwhelm, a few mindful breaths can anchor you in the present.</li>
+          <li>Transient Emotions – All emotions, even intense ones, naturally come and go.</li>
+          <li>Mindful Labeling – Naming anger, sadness, or worry can keep them from spiraling.</li>
+          <li>Self-Compassion Soothes – Being kind to yourself defuses tension more effectively than self-criticism.</li>
+          <li>Body Tension Clues – Physical tightness (shoulders, jaw, stomach) often flags mounting stress.</li>
+          <li>Acceptance, Not Suppression – Allowing an emotion to be felt—rather than fought—lets it dissipate.</li>
+          <li>Healthy Concern vs. Worry – Worry is repetitive and draining; concern is focused and actionable.</li>
+          <li>Stepping Back from Anxiety – Observing anxious thoughts as passing mental events undermines their power.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 2 -->
+    <div class="category">
+      <h2>2) Self-Awareness & Inner Reflection</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Autopilot Mind – Many thoughts repeat out of habit, not intention.</li>
+          <li>Inner Narrator Isn’t “Me” – The constant mental commentary can be observed instead of believed.</li>
+          <li>Discover Conditioned Patterns – Repetitive relationship or behavior loops often stem from past conditioning.</li>
+          <li>Question Assumptions – Gently challenge your own “I can’t” or “I’m not worthy” scripts.</li>
+          <li>Subtle Body Language – Shifts in posture can mirror shifts in mood or self-esteem.</li>
+          <li>Identity vs. Roles – We can wear many hats (e.g., parent, friend, professional) without losing our core self.</li>
+          <li>The Gap Between Trigger & Reaction – There’s always a small space to choose how to respond.</li>
+          <li>Naming Inner Critic – Labeling critical thoughts (“There’s the critic again”) can diminish their sting.</li>
+          <li>Mindful Journaling – Writing down insights uncovers deeper layers of belief.</li>
+          <li>Self-Inquiry – Asking “Who am I beneath these thoughts and emotions?” can reveal deeper truths.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 3 -->
+    <div class="category">
+      <h2>3) Concentration & Mental Clarity</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Single-Pointed Focus – Training attention on one object (breath, mantra) strengthens concentration.</li>
+          <li>Wandering Mind Is Normal – Gently redirecting attention builds mental “muscle.”</li>
+          <li>Less Is More – Short, focused work bursts often outperform long, distracted sessions.</li>
+          <li>Mental Chatter vs. Clarity – Quieting unnecessary commentary frees up cognitive space.</li>
+          <li>Relaxed Yet Alert – True focus feels simultaneously calm and highly attentive.</li>
+          <li>Flow States Emerge – Deep concentration can lead to timeless “flow” experiences.</li>
+          <li>Reducing Fragmentation – Mindful attention reduces the “scatter” caused by multitasking.</li>
+          <li>One Thing at a Time – Doing tasks sequentially with presence improves both quality and speed.</li>
+          <li>Observation Yields Insights – Focused attention on thoughts often reveals new solutions effortlessly.</li>
+          <li>Concentration as a Skill – Consistency in practice makes returning to focus easier over time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 4 -->
+    <div class="category">
+      <h2>4) Compassion, Empathy & Altruism</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Self-Kindness First – Genuine compassion for others flows from kindness toward oneself.</li>
+          <li>Common Humanity – Everyone experiences pain, fear, and the wish for happiness.</li>
+          <li>Listening to Understand – Giving full presence to another person is a profound act of empathy.</li>
+          <li>Compassion Isn’t Weakness – It can coexist with firmness and boundaries.</li>
+          <li>Forgiveness Frees Both Sides – Letting go of resentment lifts an inner burden.</li>
+          <li>Empathy vs. Sympathy – Empathy is feeling with someone; sympathy can be distant pity.</li>
+          <li>Anger Often Hides Hurt – Seeing this softens judgment of yourself and others.</li>
+          <li>Small Acts of Kindness – Simple gestures (a smile, a door held open) can ripple outward.</li>
+          <li>Shared Vulnerability – Recognizing your own frailty fosters deeper compassion for others.</li>
+          <li>Practice Loving-Kindness – Regularly wishing well to yourself and others transforms outlook.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 5 -->
+    <div class="category">
+      <h2>5) Understanding Impermanence & Change</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Everything Passes – Emotions, situations, even problems shift eventually.</li>
+          <li>Clinging Causes Pain – Holding tightly to what’s inevitably changing creates suffering.</li>
+          <li>Breath as a Mini-Cycle – Each inhale and exhale reminds us of impermanence.</li>
+          <li>Life Is Fluid – Identities, relationships, and circumstances all evolve.</li>
+          <li>Grief Ebbs & Flows – Even deep sorrow softens with time.</li>
+          <li>Resistance Intensifies Discomfort – Acceptance of change eases its sting.</li>
+          <li>Appreciation Grows – Recognizing ephemerality can heighten gratitude for the present.</li>
+          <li>Renewal Happens – Endings open space for beginnings.</li>
+          <li>Adaptability Is Strength – Embracing life’s fluid nature fosters resilience.</li>
+          <li>Letting Go Liberates – Freeing ourselves from what no longer serves paves the way for new growth.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 6 -->
+    <div class="category">
+      <h2>6) Non-Judgment & Acceptance</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Observe, Don’t Label – Experiences can simply be witnessed without stamping “good” or “bad.”</li>
+          <li>Acceptance vs. Resignation – Allowing reality doesn’t mean you stop striving for improvement.</li>
+          <li>Emotions Are Teachers – Instead of judging feelings, get curious about their message.</li>
+          <li>Self-Judgment Fuels Shame – Gentleness toward yourself thaws the cycle.</li>
+          <li>Others’ Behavior – Often rooted in their own struggles; condemnation rarely helps.</li>
+          <li>Embrace Uncertainty – Not knowing is part of being open and receptive.</li>
+          <li>Limit “Should” Thinking – Rigid expectations create tension and frustration.</li>
+          <li>Peace in Allowing – Letting each moment be as it is can defuse inner conflict.</li>
+          <li>Tolerance of Ambiguity – Holding space for unresolved questions fosters wisdom.</li>
+          <li>Opportunities in Unwanted Events – Acceptance may reveal hidden gifts or lessons.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 7 -->
+    <div class="category">
+      <h2>7) Mind-Body Connection & Physical Awareness</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Emotions in the Body – Anxiety might appear as a knot in the stomach, anger as heat in the chest.</li>
+          <li>Posture Influences Mood – Sitting upright can cultivate alertness and confidence.</li>
+          <li>Tension as Information – Tight shoulders or clenched jaw can signal stress before the mind notices.</li>
+          <li>Mindful Movement – Yoga, walking, or qigong can unify physical and mental awareness.</li>
+          <li>Breath & Heart Rate – Slow, steady breathing can calm a racing heart.</li>
+          <li>Body Scan – Methodically checking each region helps detect and release stored tension.</li>
+          <li>Relaxing the Face – Unclenching the jaw or softening the brow soothes the whole system.</li>
+          <li>Hunger vs. Craving – Tuning in can differentiate genuine needs from habitual urges.</li>
+          <li>Sensory Anchors – Focusing on sound, touch, or taste can ground an overactive mind.</li>
+          <li>Physical Stillness & Mental Clarity – Settling the body often settles thought turbulence.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 8 -->
+    <div class="category">
+      <h2>8) Overcoming Negative Thought Patterns</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Label the Loop – Acknowledge recurrent negative thoughts as “worry loop” or “critic loop.”</li>
+          <li>Question Catastrophizing – Gently ask: “Is it really true?”</li>
+          <li>Gratitude Shifts Perspective – Focusing on what’s good dilutes negative mental chatter.</li>
+          <li>Self-Compassion vs. Guilt – Accepting mistakes opens space to learn, rather than spiral.</li>
+          <li>Observation Weakens Repetition – Merely watching a negative thought arise can rob it of power.</li>
+          <li>Reframing Language – Replace “I always fail” with “I’m learning through setbacks.”</li>
+          <li>Mindful Pause – Halt rumination by returning attention to the breath or senses.</li>
+          <li>Humor as Antidote – Lightly acknowledging our mental drama can break its hold.</li>
+          <li>Community & Sharing – Voicing worries to a supportive listener can reduce their intensity.</li>
+          <li>Impermanence Applies – Even persistent negative thoughts fade when not constantly fed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 9 -->
+    <div class="category">
+      <h2>9) Insights on the Illusion of a Fixed “Self”</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Fluid Identity – Who you are today differs subtly from who you were yesterday.</li>
+          <li>Observing the “I” – Noticing the voice in your head reveals you can watch it rather than be it.</li>
+          <li>Roles vs. Essence – Social roles (friend, parent, worker) are temporary, not your ultimate identity.</li>
+          <li>Contradictory Self-Views – The mind can hold opposing ideas about “me,” suggesting no fixed center.</li>
+          <li>Conditioned Identity – Much of “who we are” is shaped by upbringing, culture, and habits.</li>
+          <li>Ego as Protective Layer – An inflexible ego can resist growth or vulnerability.</li>
+          <li>Moments of Self-Loss – Deep engagement (flow states) temporarily suspends the sense of “me.”</li>
+          <li>Self-Image Shifts – Beliefs about yourself evolve as awareness deepens.</li>
+          <li>Shared Humanity – Seeing yourself in others dissolves rigid personal boundaries.</li>
+          <li>Beyond Labels – True identity may be awareness itself, beyond changing labels and roles.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Category 10 -->
+    <div class="category">
+      <h2>10) Spiritual & Existential Insights</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li>Oneness – A felt sense that all beings and things are interconnected.</li>
+          <li>Stillness as Sacred – Profound silence can evoke reverence or awe.</li>
+          <li>Inner Wholeness – Contentment can arise from within, independent of externals.</li>
+          <li>Transcending Words – Some deeper realizations can only be felt, not described.</li>
+          <li>Existential Fear Softenings – Awareness of mortality can prompt living with greater vitality and love.</li>
+          <li>Trust in Life – Letting go of rigid control invites serendipitous flow.</li>
+          <li>Universal Compassion – Recognizing shared existence evokes caring for all.</li>
+          <li>Purpose Emerges Naturally – In stillness, life direction often clarifies without force.</li>
+          <li>Embrace Mystery – Accepting the unknown can be freeing rather than frightening.</li>
+          <li>A Boundless Presence – At the deepest level, many report a sense of infinite consciousness or being.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE SECTION -->
+  <div class="categories" style="margin-top: 2rem;">
+    <div class="category">
+      <h2>How to Use These Insights</h2>
+      <div class="accordion-content">
+        <ul class="accordion-list">
+          <li><strong>Reflect:</strong> Pick a single category or bullet point before each meditation session and explore it in your own experience.</li>
+          <li><strong>Journal:</strong> Note what resonates or triggers further questions.</li>
+          <li><strong>Integrate:</strong> Bring these observations into daily life—relationships, work, self-care—to see how mindfulness deepens over time.</li>
+        </ul>
+        <p style="margin-top: 1rem;">
+          Each insight is a doorway. Regular meditation helps you step through 
+          these doorways, unveiling layers of awareness, emotional balance, 
+          and, ultimately, a more compassionate engagement with life.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Created with ♥. Deploy to GitHub Pages for free at <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">pages.github.com</a>.</p>
+  </div>
+
+  <script>
+    // ACCORDION TOGGLE LOGIC
+    document.querySelectorAll('.category').forEach(category => {
+      category.addEventListener('click', () => {
+        const content = category.querySelector('.accordion-content');
+        if (content.classList.contains('open')) {
+          // Close it
+          content.style.maxHeight = 0;
+          content.classList.remove('open');
+        } else {
+          // Close all others
+          document.querySelectorAll('.accordion-content.open').forEach(openContent => {
+            openContent.style.maxHeight = 0;
+            openContent.classList.remove('open');
+          });
+          // Open this one
+          content.classList.add('open');
+          // Dynamically set maxHeight to scrollHeight so it expands
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
